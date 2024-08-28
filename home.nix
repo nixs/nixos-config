@@ -30,7 +30,7 @@
   home.packages = [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
-    pkgs.hello
+    # pkgs.hello
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -80,6 +80,28 @@
   #
   home.sessionVariables = {
     EDITOR = "vi";
+  };
+
+  # Aliases, will be inherited by shell.
+  home.shellAliases = {
+    ls = "eza -gl --git --color=automatic";
+    tree = "eza --tree";
+    cat = "bat";
+
+    ip = "ip --color";
+    ipb = "ip --color --brief";
+
+    htop = "btm -b";
+    neofetch = "fastfetch";
+
+    ts = "tailscale";
+    tst = "tailscale status";
+    tsu = "tailscale up --ssh --operator=$USER";
+    tsd = "tailscale down";
+
+    speedtest = "curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -";
+
+    hm = "nh home switch /home/nick/nixos-config";
   };
 
   # Let Home Manager install and manage itself.

@@ -29,27 +29,6 @@
 
         export EDITOR=vim
       '';
-
-      shellAliases = {
-        ls = "eza -gl --git --color=automatic";
-        tree = "eza --tree";
-        cat = "bat";
-
-        ip = "ip --color";
-        ipb = "ip --color --brief";
-
-        htop = "btm -b";
-        neofetch = "fastfetch";
-
-        ts = "tailscale";
-        tst = "tailscale status";
-        tsu = "tailscale up --ssh --operator=$USER";
-        tsd = "tailscale down";
-
-        speedtest = "curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -";
-
-        hm = "nh home switch /home/nick/nixos-config";
-      };
     };
   };
 }

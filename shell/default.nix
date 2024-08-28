@@ -1,6 +1,7 @@
 { pkgs, self, ... }:
 {
   imports = [
+    ./bash.nix
     ./bat.nix
     ./bottom.nix
     ./git.nix
