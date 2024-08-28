@@ -28,6 +28,7 @@
 
       vim.opt.hlsearch = true
       vim.opt.ignorecase = true
+
       vim.opt.showmatch = true
 
       vim.opt.number = true
@@ -53,6 +54,19 @@
       map('n', '<leader>fh',       ':Telescope help_tags<CR>' )
       map('n', '<leader>fo',       ':Telescope vim_options<CR>' )
 
+      map('n', '<leader>h',        ':split<CR>' )
+      map('n', '<leader>v',        ':vsplit<CR>' )
+      map('n', '<leader>q',        ':q<CR>' )
+
+      -- vim-powered terminal in split window (disabled, use toggleterm instead).
+      -- map('n', '<leader>t',        ':below term<CR>10<C-w>_' )
+      -- map('t', '<leader>t',        '<C-w>:below term<CR>10<C-w>_' )
+
+      -- Comment bindings
+      map('i', '<C-_>', '<Esc>:Comment<CR>')
+      map('n', '<C-_>', 'gcc', { remap = true })
+      map('v', '<C-_>', 'gc',  { remap = true })
+
       vim.cmd.colorscheme "catppuccin"
     '';
 
@@ -60,6 +74,7 @@
       nvim-web-devicons
       telescope-nvim
       vim-nix
+      vim-tmux-navigator
       vim-visual-multi
       {
         plugin = nvim-comment;
@@ -80,6 +95,13 @@
         type = "viml";
         config = ''
           let g:lightline = {'colorscheme': 'catppuccin'}
+        '';
+      }
+      {
+        plugin = toggleterm-nvim;
+        type = "lua";
+        config = ''
+          require('toggleterm').setup{ insert_mappings = true }
         '';
       }
     ];
