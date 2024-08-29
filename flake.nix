@@ -34,6 +34,10 @@
         "nick" = libx.mkHome { };
       };
 
+      lib = {
+        inherit (libx) mkHome forAllSystems;
+      };
+
       # Devshell for bootstrapping
       # Accessible via 'nix develop' or 'nix-shell' (legacy)
       devShells = libx.forAllSystems (
