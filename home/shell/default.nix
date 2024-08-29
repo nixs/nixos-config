@@ -76,6 +76,6 @@
 
     speedtest = "curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -";
 
-    hm = "nh home switch /home/nick/nixos-config";
+    hm = "nh home switch ~/nixos-config";
   };
 }
