@@ -30,7 +30,7 @@
       };
       modules = [
         inputs.catppuccin.homeManagerModules.catppuccin
-        ../home.nix
+        ../home
       ];
     };
 
