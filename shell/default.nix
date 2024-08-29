@@ -4,6 +4,7 @@
     ./bash.nix
     ./bat.nix
     ./bottom.nix
+    ./fzf.nix
     ./git.nix
     ./starship.nix
     ./tmux.nix
