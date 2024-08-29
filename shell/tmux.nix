@@ -13,15 +13,11 @@
       sensibleOnTop = true;
       # This should either be screen-256color or tmux-256color where it exists
       terminal = "tmux-256color";
+      shell = "${pkgs.zsh}/bin/zsh";
 
       extraConfig = ''
         set -g status on
         set -g mouse on
-
-        # Where this shows 'alacritty' - the value should be whatever $TERM is outside tmux
-        #set-option -ga terminal-overrides ",alacritty:Tc"
-
-        set-option -g default-shell ${pkgs.zsh}/bin/zsh
 
         # Catppuccin options
         set -g @catppuccin_host 'on'
@@ -57,7 +53,7 @@
         bind-key -T copy-mode-vi 'C-Space' select-pane -t:.+
 
         bind-key h split-window -h # Split panes horizontal
-        bind-key b split-window -v # Split panes vertically
+        bind-key v split-window -v # Split panes vertically
       '';
     };
   };
