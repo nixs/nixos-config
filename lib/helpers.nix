@@ -10,13 +10,14 @@
   # Helper function for generating home-manager configs
   mkHome =
     {
+      extraModules ? [],
       hostname ? null,
       user ? username,
       desktop ? null,
       system ? "x86_64-linux",
     }:
     inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = inputs.unstable.legacyPackages.${system};
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
       extraSpecialArgs = {
         inherit
           self
@@ -31,7 +32,7 @@
       modules = [
         inputs.catppuccin.homeManagerModules.catppuccin
         ../home
-      ];
+      ] ++ extraModules;
     };
 
   forAllSystems = inputs.nixpkgs.lib.genAttrs [
