@@ -54,9 +54,10 @@
       map('n', '<leader>fh',       ':Telescope help_tags<CR>' )
       map('n', '<leader>fo',       ':Telescope vim_options<CR>' )
 
-      map('n', '<leader>h',        ':split<CR>' )
-      map('n', '<leader>v',        ':vsplit<CR>' )
+      map('n', '<leader>h',        ':vsplit<CR>' )
+      map('n', '<leader>v',        ':split<CR>' )
       map('n', '<leader>q',        ':q<CR>' )
+      map('n', '<leader>x',        ':q<CR>' )
 
       -- vim-powered terminal in split window (disabled, use toggleterm instead).
       -- map('n', '<leader>t',        ':below term<CR>10<C-w>_' )
