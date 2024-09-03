@@ -24,6 +24,7 @@
     gpg.enable = true;
     home-manager.enable = true;
     jq.enable = true;
+    ripgrep.enable = true;
   };
 
   services.gpg-agent = {
