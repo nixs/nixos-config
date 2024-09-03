@@ -23,8 +23,8 @@
       vim.opt.tabstop = 2
 
       vim.opt.backspace = "indent,eol,start"
-      vim.g.mapleader = ';'
-      vim.g.maplocalleader = ';'
+      vim.g.mapleader = ' '
+      vim.g.maplocalleader = ' '
 
       vim.opt.hlsearch = true
       vim.opt.ignorecase = true
@@ -35,6 +35,9 @@
       vim.opt.background = dark
       vim.opt.termguicolors = true
 
+      -- Use system clipboard by default.
+      vim.opt.clipboard:append("unnamedplus")
+
       function map(mode, lhs, rhs, opts)
         local options = {noremap = true, silent = false}
         if opts then
@@ -44,10 +47,10 @@
       end
 
       map('n', '<leader>t',        ':ToggleTerm<CR>'      )
-      map('i', '<leader><leader>', '<Esc>'                )
-      map('t', '<Esc>',            '<C-\\><C-n>'          )
+      -- map('i', '<leader><leader>', '<Esc>'                )
+      -- map('t', '<Esc>',            '<C-\\><C-n>'          )
       map('n', '<leader>p',        ':NvimTreeToggle<CR>'  )
-      map('n', '<leader><Space>',  ':NvimTreeToggle<CR>'  )
+      -- map('n', '<leader><Space>',  ':NvimTreeToggle<CR>'  )
       map('n', '<leader>ff',       ':Telescope find_files<CR>')
       map('n', '<leader>fg',       ':Telescope live_grep<CR>' )
       map('n', '<leader>fb',       ':Telescope buffers<CR>'   )
