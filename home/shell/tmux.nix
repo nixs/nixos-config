@@ -62,8 +62,8 @@
         bind-key -T copy-mode-vi 'C-\' select-pane -l
         # bind-key -T copy-mode-vi 'C-Space' select-pane -t:.+
 
-        bind-key h split-window -h # Split panes horizontal
-        bind-key v split-window -v # Split panes vertically
+        bind-key h split-window -h -c "#{pane_current_path}" # Split panes horizontal
+        bind-key v split-window -v -c "#{pane_current_path}" # Split panes vertically
         bind-key 'M-h' resize-pane -L 5
         bind-key 'M-j' resize-pane -D 5
         bind-key 'M-k' resize-pane -U 5
