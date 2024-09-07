@@ -64,10 +64,10 @@
 
         bind-key h split-window -h -c "#{pane_current_path}" # Split panes horizontal
         bind-key v split-window -v -c "#{pane_current_path}" # Split panes vertically
-        bind-key 'M-h' resize-pane -L 5
-        bind-key 'M-j' resize-pane -D 5
-        bind-key 'M-k' resize-pane -U 5
-        bind-key 'M-l' resize-pane -R 5
+        bind-key -n 'M-h' resize-pane -L 5
+        bind-key -n 'M-j' resize-pane -D 5
+        bind-key -n 'M-k' resize-pane -U 5
+        bind-key -n 'M-l' resize-pane -R 5
       '';
     };
   };
