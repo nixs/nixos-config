@@ -20,6 +20,9 @@
         set -g status on
         set -g mouse on
 
+        # Append terminal override; the value should be on whatever $TERM is outside tmux
+        set -ag terminal-overrides ",xterm*:colors=256"
+
         unbind r
         bind r source-file ~/.config/tmux/tmux.conf
 
