@@ -14,7 +14,7 @@
       # This should either be screen-256color or tmux-256color where it exists
       terminal = "tmux-256color";
       shell = "${pkgs.zsh}/bin/zsh";
-      prefix = "C-Space";
+      prefix = "C-b";
 
       extraConfig = ''
         set -g status on
@@ -56,14 +56,14 @@
         if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
             "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
 
-        # bind-key -n 'C-Space' if-shell "$is_vim" 'send-keys C-Space' 'select-pane -t:.+'
+        bind-key -n 'C-Space' if-shell "$is_vim" 'send-keys C-Space' 'select-pane -t:.+'
 
         bind-key -T copy-mode-vi 'C-h' select-pane -L
         bind-key -T copy-mode-vi 'C-j' select-pane -D
         bind-key -T copy-mode-vi 'C-k' select-pane -U
         bind-key -T copy-mode-vi 'C-l' select-pane -R
         bind-key -T copy-mode-vi 'C-\' select-pane -l
-        # bind-key -T copy-mode-vi 'C-Space' select-pane -t:.+
+        bind-key -T copy-mode-vi 'C-Space' select-pane -t:.+
 
         bind-key h split-window -h -c "#{pane_current_path}" # Split panes horizontal
         bind-key v split-window -v -c "#{pane_current_path}" # Split panes vertically
