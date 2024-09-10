@@ -16,6 +16,11 @@
       shell = "${pkgs.zsh}/bin/zsh";
       prefix = "C-b";
 
+      plugins = with pkgs; [
+        tmuxPlugins.resurrect
+        tmuxPlugins.continuum
+      ];
+
       extraConfig = ''
         set -g status on
         set -g mouse on
@@ -25,6 +30,9 @@
 
         unbind r
         bind r source-file ~/.config/tmux/tmux.conf
+
+        set -g @resurrect-capture-pane-contents 'on'
+        set -g @continuum-restore 'on'
 
         # Prefix then [ to start vi mode
         # Prefix then ] to paste
