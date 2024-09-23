@@ -21,6 +21,7 @@
 
   programs = {
     eza.enable = true;
+    fastfetch.enable = true;
     git.enable = true;
     gpg.enable = true;
     home-manager.enable = true;
@@ -37,6 +38,7 @@
     age
     nh
     sops
+    tldr
   ];
 
   # Home Manager can also manage your environment variables through
