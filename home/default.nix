@@ -18,7 +18,10 @@
       # inputs.nix-colors.homeManagerModules.default
 
       ./shell
-    ];
+    ]
+    ++ lib.optional (builtins.pathExists (
+      ./. + "/users/${username}"
+    )) ./users/${username};
 
   home = {
     inherit username stateVersion;

@@ -1,7 +1,10 @@
-_: {
+{
+  lib,
+  ...
+}: {
   programs = {
     bash = {
-      enable = true;
+      enable = lib.mkDefault true;
     };
   };
 }

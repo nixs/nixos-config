@@ -32,6 +32,7 @@
     in {
       homeConfigurations = {
         "nick" = libx.mkHome { };
+        "nick@ubuntu1" = libx.mkHome { hostname = "ubuntu1"; };
       };
 
       lib = {
