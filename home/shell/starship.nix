@@ -1,11 +1,18 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
-  programs = {
+  options = {
+    nixs.programs.starship.extraSettings = lib.mkOption {
+      type = lib.types.anything;
+      default = {};
+      description = "Extra starship options to merge.";
+    };
+  };
+  config.programs = {
     starship = {
       enable = true;
       enableZshIntegration = true;
-      settings = lib.mkDefault {
-        format = lib.concatStrings [
+      settings = lib.mkMerge [{
+        format = lib.mkDefault (lib.concatStrings [
           "$username"
           "$hostname"
           "$directory"
@@ -19,16 +26,16 @@
           "$status"
           "$line_break"
           "$character"
-        ];
+        ]);
 
         fill.symbol = " ";
         hostname.ssh_symbol = "";
         python.format = "([ $virtualenv]($style)) ";
         rust.symbol = " ";
         status.disabled = false;
-        username.format = "[$user]($style)@";
+        username.format = lib.mkDefault "[$user]($style)@";
 
-        character = {
+        character = lib.mkDefault {
           success_symbol = "[❯](purple)";
           error_symbol = "[❯](red)";
           vicmd_symbol = "[❯](green)";
@@ -84,7 +91,8 @@
           symbol = "❄️ ";
           format = "via [$symbol\($name\)]($style)";
         };
-      };
+      }
+      config.nixs.programs.starship.extraSettings];
     };
   };
 }
