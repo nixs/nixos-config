@@ -3,7 +3,6 @@ _: {
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
-    catppuccin.enable = true;
 
     changeDirWidgetOptions = [ "--preview 'tree -C {} | head -200'" ];
 
@@ -21,4 +20,5 @@ _: {
 
     tmux.enableShellIntegration = true;
   };
+  catppuccin.fzf.enable = true;
 }

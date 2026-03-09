@@ -3,12 +3,11 @@
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-unwrapped;
-    catppuccin.enable = true;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
 
-    extraLuaConfig = ''
+    initLua = ''
       vim.opt.autochdir = true
       vim.opt.backup = false
 
@@ -136,4 +135,5 @@
       }
     ];
   };
+  catppuccin.nvim.enable = true;
 }

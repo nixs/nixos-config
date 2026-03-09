@@ -10,24 +10,26 @@
     git = {
       enable = true;
 
-      userEmail = "nrsolichin@gmail.com";
-      userName = "Nicholas Solichin";
-
       includes = [
       ];
 
-      aliases = {
-        lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
-        st = "status";
-        c = "commit";
-        amend = "commit --amend";
-        untrack = "rm --cached";
-        unadd = "restore --staged";
-        aliases = "config --get-regexp alias";
-        wdiff = "diff -w --word-diff=color --ignore-space-at-eol";
-      };
+      settings = {
+        user = {
+          email = "nrsolichin@gmail.com";
+          name = "Nicholas Solichin";
+        };
 
-      extraConfig = {
+        aliases = {
+          lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+          st = "status";
+          c = "commit";
+          amend = "commit --amend";
+          untrack = "rm --cached";
+          unadd = "restore --staged";
+          aliases = "config --get-regexp alias";
+          wdiff = "diff -w --word-diff=color --ignore-space-at-eol";
+        };
+
         branch = {
           sort = "-committerdate";
         };

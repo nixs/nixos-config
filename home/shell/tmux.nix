@@ -5,7 +5,6 @@
 
     tmux = {
       enable = true;
-      catppuccin.enable = true;
 
       aggressiveResize = true;
       baseIndex = 1;
@@ -89,7 +88,18 @@
         bind-key -n 'M-j' resize-pane -D 5
         bind-key -n 'M-k' resize-pane -U 5
         bind-key -n 'M-l' resize-pane -R 5
+
+        set -g pane-border-status top
+        set -g pane-border-format "#{pane_id}: #{pane_current_command} (#{pane_title})"
+        # Rename pane.
+        bind-key -n 'M-p' command-prompt -p "Rename pane:" "select-pane -T '%%'"
+        # Background/join pane.
+        # View pane using `tmux capture-pane -pt "{pane_title}" -S -20`.
+        bind-key -n 'M-o' command-prompt -I "#{pane_title}" -p "Hide to window:" "break-pane -d -n '%%'"
+        bind-key -n 'M-i' choose-tree -w "join-pane -h -s '%%'"
+
       '';
     };
   };
+  catppuccin.tmux.enable = true;
 }

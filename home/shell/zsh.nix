@@ -1,23 +1,22 @@
-{
+{ config, ... }: {
   programs = {
     zsh = {
       enable = true;
-      dotDir = ".config/zsh";
+      dotDir = "${config.home.homeDirectory}/.config/zsh";
 
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting = {
         enable = true;
-        catppuccin.enable = true;
       };
 
       history = {
         save = 10000;
         size = 10000;
-        path = "$HOME/.cache/zsh_history";
+        path = "${config.home.homeDirectory}/.cache/zsh_history";
       };
 
-      initExtra = ''
+      initContent = ''
         bindkey '^[[1;5C' forward-word # Ctrl+RightArrow
         bindkey '^[[1;5D' backward-word # Ctrl+LeftArrow
 
@@ -31,4 +30,5 @@
       '';
     };
   };
+  catppuccin.zsh-syntax-highlighting.enable = true;
 }

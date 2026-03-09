@@ -1,6 +1,4 @@
 _: {
-  programs.bottom = {
-    enable = true;
-    catppuccin.enable = true;
-  };
+  programs.bottom.enable = true;
+  catppuccin.bottom.enable = true;
 }
