@@ -1,4 +1,7 @@
 { pkgs, self, ... }:
+let
+  theme = import "${self}/lib/theme" { inherit pkgs; };
+in
 {
   imports = [
     ./bash.nix
@@ -14,9 +17,8 @@
   ];
 
   catppuccin = {
-    flavor = "macchiato";
-    accent = "blue";
-    #size = "standard";
+    inherit (theme.catppuccin) flavor;
+    inherit (theme.catppuccin) accent;
   };
 
   programs = {

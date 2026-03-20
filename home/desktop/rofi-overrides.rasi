@@ -1,0 +1,53 @@
+@import "catppuccin-default.rasi"
+@import "catppuccin-mocha.rasi"
+
+* {
+    font:   "monospace 16";
+}
+
+window {
+    border-radius:  24px;
+}
+
+mainbox {
+    padding:    12px;
+}
+
+inputbar {
+    border:         2px;
+    border-radius:  16px;
+
+    padding:    8px 16px;
+    spacing:    8px;
+    children:    [ "prompt","entry","num-filtered-rows","textbox-num-sep","num-rows","case-indicator" ];
+}
+
+entry {
+    placeholder:        "Search";
+}
+
+message {
+    margin:             12px 0 0;
+    border-radius:      16px;
+}
+
+textbox {
+    padding:    8px 24px;
+}
+
+listview {
+    lines:  8;
+    border: 0px;
+}
+
+element {
+    padding:        8px 16px;
+    spacing:        8px;
+    border-radius:  16px;
+}
+
+button {
+    padding:       8px 16px;
+    border-radius: 16px;
+}
+

@@ -1,5 +1,6 @@
 {
   config,
+  desktop,
   pkgs,
   lib,
   outputs,
@@ -19,6 +20,7 @@
 
       ./shell
     ]
+    ++ lib.optional (builtins.isString desktop) ./desktop
     ++ lib.optional (builtins.pathExists (
       ./. + "/users/${username}"
     )) ./users/${username};
