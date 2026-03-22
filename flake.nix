@@ -10,6 +10,8 @@
     };
 
     catppuccin.url = "github:catppuccin/nix";
+
+    niri.url = "github:sodiboo/niri-flake";
   };
 
   outputs = { self, nixpkgs, unstable, home-manager, ... }@inputs:

@@ -30,6 +30,7 @@
         username = user;
       };
       modules = [
+        { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
         inputs.catppuccin.homeModules.catppuccin
         ../home
       ] ++ extraModules;

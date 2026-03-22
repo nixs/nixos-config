@@ -4,11 +4,15 @@ let
 in
 {
   imports = [
-    #(./. + "/${desktop}")
+    (./. + "/${desktop}")
 
-    ./rofi.nix
     ./gtk.nix
+    ./kitty.nix
+    ./mako.nix
     ./qt.nix
+    ./rofi.nix
+    ./waybar.nix
+    ./wl-common.nix
   ];
 
   programs = {
@@ -18,11 +22,12 @@ in
     catppuccin-gtk
     desktop-file-utils
     libnotify
-    xdg-utils
+    nautilus
     theme.fonts.default.package
     theme.fonts.emoji.package
     theme.fonts.iconFont.package
     theme.fonts.monospace.package
+    xdg-utils
   ];
 
   fonts.fontconfig.enable = true;
