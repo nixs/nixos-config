@@ -10,6 +10,7 @@ in
 
   home = {
     packages = with pkgs; [
+      qt6.qtwayland
       theme.qtTheme.package
       libsForQt5.qtstyleplugin-kvantum
     ];
