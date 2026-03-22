@@ -1,0 +1,115 @@
+/* Global Reset */
+* {
+    border: none;
+    padding: 0px;
+    font-family: "sans-serif"; /* Replace with ${theme.fonts.iconFont.name} */
+    font-size: 15px;
+}
+
+window#waybar {
+    background-color: transparent;
+}
+
+window > box {
+    margin: 8px 8px 0px 8px;
+    background: #282c34; /* Replace with ${theme.colours.bg} */
+    opacity: 0.8;
+    border-radius: 8px;
+}
+
+/* Module Containers */
+.modules-right {
+    margin-right: 10px;
+    padding: 5px 10px;
+}
+
+.modules-center {
+    margin: 0px;
+    padding: 5px 10px;
+}
+
+.modules-left {
+    margin-left: 10px;
+    padding: 5px 0px;
+}
+
+/* Workspaces */
+#workspaces button {
+    /* If hyprland: 0px 10px, else 0px */
+    padding: 0px 10px; 
+    background-color: transparent;
+    font-weight: lighter;
+    color: #abb2bf; /* Replace with ${theme.colours.text} */
+}
+
+#workspaces button:hover {
+    color: #61afef; /* Replace with ${theme.colours.accent} */
+    background-color: transparent;
+}
+
+#workspaces button.focused, 
+#workspaces button.active {
+    color: #61afef; /* Replace with ${theme.colours.accent} */
+    font-weight: normal;
+    background-color: transparent;
+}
+
+/* Generic Module Padding/Color */
+#battery,
+#bluetooth,
+#clock,
+#cpu,
+#custom-lock,
+#custom-power,
+#custom-quit,
+#custom-reboot,
+#custom-vpn,
+#group-group-power,
+#idle_inhibitor,
+#memory,
+#network,
+#pulseaudio,
+#wireplumber {
+    padding: 0px 10px;
+    color: #abb2bf; /* Replace with ${theme.colours.text} */
+}
+
+/* Power Menu */
+#custom-power {
+    color: #61afef; /* Replace with ${theme.colours.accent} */
+    background-color: transparent;
+}
+
+#custom-quit, 
+#custom-lock, 
+#custom-reboot {
+    color: #e06c75; /* Replace with ${theme.colours.red} */
+    background-color: transparent;
+}
+
+/* ----- Indicators ----- */
+#idle_inhibitor.activated {
+    color: #61afef; /* Replace with ${theme.colours.accent} */
+}
+
+#battery.charging {
+    color: #98c379; /* Replace with ${theme.colours.green} */
+}
+
+#battery.warning:not(.charging) {
+    color: #d19a66; /* Replace with ${theme.colours.orange} */
+}
+
+#battery.critical:not(.charging) {
+    color: #e06c75; /* Replace with ${theme.colours.red} */
+}
+
+#temperature.critical {
+    color: #e06c75; /* Replace with ${theme.colours.red} */
+}
+
+#bluetooth.off,
+#wireplumber.muted,
+#pulseaudio.source-muted {
+    color: #d19a66; /* Replace with ${theme.colours.orange} */
+}
