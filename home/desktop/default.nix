@@ -11,6 +11,7 @@ in
     ./mako.nix
     ./qt.nix
     ./rofi.nix
+    ./hyprlock.nix
     ./waybar.nix
     ./wl-common.nix
   ];

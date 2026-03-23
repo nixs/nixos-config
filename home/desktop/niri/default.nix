@@ -111,14 +111,14 @@
   
     # Startup programs
     spawn-at-startup = [
-      #{ command = [ "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1" ]; }
+      { command = [ "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1" ]; }
       { command = [ "${pkgs.waybar}/bin/waybar" ]; }
       #{ command = [ "${pkgs.dms}/bin/dms" "run" ]; }
-      #{ command = [ "google-chrome-stable" ]; }
+      { command = [ "google-chrome-stable" ]; }
     ];
   };
 
-  home.file.".config/niri/dms".source = "${inputs.dms.packages.${pkgs.system}.default}/share/dms/niri";
+  #home.file.".config/niri/dms".source = "${inputs.dms.packages.${pkgs.system}.default}/share/dms/niri";
 
   xdg.portal = {
     enable = true;
