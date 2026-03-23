@@ -12,7 +12,7 @@ in
     enable = true;
     settings = {
       general = {
-        grace = 5;
+        # grace = 5;
         hide_cursor = true;
       };
 
@@ -36,7 +36,7 @@ in
 
       label = [
         {
-          text = "Hello";
+          text = "$TIME12";
           color = "rgba(202, 211, 245, 1.0)";
           font_family = theme.fonts.default.name;
           font_size = 64;
@@ -46,10 +46,10 @@ in
           position = "0, 160";
         }
         {
-          text = "$TIME";
+          text = ''cmd[update:60000] echo "$(date +"%A, %d %B")"'';
           color = "rgba(184, 192, 224, 1.0)";
           font_family = theme.fonts.default.name;
-          font_size = 32;
+          font_size = 24;
           text_align = "center";
           halign = "center";
           valign = "center";
@@ -73,8 +73,8 @@ in
 
       listener = [
         {
-          # Lock screen after 5 minutes
-          timeout = 300;
+          # Lock screen after 2 minutes
+          timeout = 120;
           on-timeout = "loginctl lock-session";
         }
         {

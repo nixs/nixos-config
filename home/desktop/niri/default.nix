@@ -48,6 +48,19 @@
       gaps = 10;
       center-focused-column = "never";
     };
+
+    outputs = {
+      "eDP-1" = {
+        mode = { width = 1920; height = 1200; refresh = 60.0; };
+        scale = 1.25;
+        position = { x = 0; y = 146; };
+      };
+      "DP-5" = {
+        mode = { width = 1920; height = 1200; refresh = 60.0; };
+        position = { x = 1536; y = 0; }; # Place next to internal display
+        variable-refresh-rate = true;   # Enable VRR/FreeSync
+      };
+    };
   
     # Example Keybindings
     binds = with config.lib.niri.actions; {
@@ -61,14 +74,15 @@
       };
 
       "Alt+T" = {
-        action.spawn = "kitty";
+        action.spawn = [ "kitty" "--title=Terminal" ];
         hotkey-overlay.title = "Terminal";
       };
       "Alt+Return" = {
-        action.spawn = "kitty";
+        action.spawn = [ "kitty" "--title=Terminal" ];
         hotkey-overlay.title = "Terminal";
       };
       "Alt+Space".action.spawn = [ "rofi" "-show" ];
+      "Alt+C".action.spawn = [ "google-chrome-stable" ];
 
       # Scrolling / Navigation
       "Alt+H".action = focus-column-left;
@@ -86,6 +100,26 @@
       "Alt+Ctrl+Shift+H".action = move-column-to-monitor-left;
       "Alt+Ctrl+Shift+L".action = move-column-to-monitor-right;
 
+      "Alt+BracketLeft".action = consume-window-into-column;
+      "Alt+BracketRight".action = expel-window-from-column;
+      "Alt+Comma".action = consume-or-expel-window-left;
+      "Alt+Period".action = consume-or-expel-window-right;
+
+      # Workspaces
+      "Super+1".action = focus-workspace 1;
+      "Super+2".action = focus-workspace 2;
+      "Super+3".action = focus-workspace 3;
+      "Super+4".action = focus-workspace 4;
+      "Super+5".action = focus-workspace 5;
+      "Super+6".action = focus-workspace 6;
+      "Super+7".action = focus-workspace 7;
+      "Super+8".action = focus-workspace 8;
+      "Super+9".action = focus-workspace 9;
+      "Alt+Ctrl+1".action.move-column-to-workspace = 1;
+      "Alt+Ctrl+2".action.move-column-to-workspace = 2;
+      "Alt+Ctrl+3".action.move-column-to-workspace = 3;
+      "Alt+Ctrl+4".action.move-column-to-workspace = 4;
+
       # Layout Controls
       "Alt+Shift+R".action = switch-preset-column-width;
       "Alt+Ctrl+R".action = reset-window-height;
@@ -97,25 +131,6 @@
 
       "Alt+Minus".action.set-column-width = "-10%";
       "Alt+Equal".action.set-column-width = "+10%";
-
-      "Alt+BracketLeft".action = consume-window-into-column;
-      "Alt+BracketRight".action = expel-window-from-column;
-      "Alt+Comma".action = consume-or-expel-window-left;
-      "Alt+Period".action = consume-or-expel-window-right;
-
-      "Super+1".action = focus-workspace 1;
-      "Super+2".action = focus-workspace 2;
-      "Super+3".action = focus-workspace 3;
-      "Super+4".action = focus-workspace 4;
-      "Super+5".action = focus-workspace 5;
-      "Super+6".action = focus-workspace 6;
-      "Super+7".action = focus-workspace 7;
-      "Super+8".action = focus-workspace 8;
-      "Super+9".action = focus-workspace 9;
-      "Ctrl+1".action.move-column-to-workspace = 1;
-      "Ctrl+2".action.move-column-to-workspace = 2;
-      "Ctrl+3".action.move-column-to-workspace = 3;
-      "Ctrl+4".action.move-column-to-workspace = 4;
 
       # Print
       "Print".action.screenshot-screen = { show-pointer = true; };
@@ -175,6 +190,7 @@
       #{ command = [ "${pkgs.dms}/bin/dms" "run" ]; }
       { command = [ "${pkgs.waybar}/bin/waybar" ]; }
       { command = [ "${pkgs.kitty}/bin/kitty" ]; }
+      { command = [ "${pkgs.hypridle}/bin/hypridle" ]; }
       { command = [ "google-chrome-stable" ]; }
     ];
   };
