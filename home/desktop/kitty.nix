@@ -18,6 +18,8 @@ in
       window_padding_width = 4;
       enable_audio_bell = false;
     };
+    shellIntegration.mode = "enabled no-sudo";
+    shellIntegration.enableBashIntegration = true;
     shellIntegration.enableZshIntegration = true;
   };
 }
