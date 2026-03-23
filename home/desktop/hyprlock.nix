@@ -63,19 +63,30 @@ in
     enable = true;
     settings = {
       general = {
-        lock_cmd = "/usr/bin/hyprlock";
-        before_sleep_cmd = "/usr/bin/hyprlock";
+        # Needed for Niri.
+        inhibit_sleep = 1;
+
+        lock_cmd = "pidof hyprlock || hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "${pkgs.niri}/bin/niri msg action power-on-monitors";
       };
 
       listener = [
         {
+          # Lock screen after 5 minutes
           timeout = 300;
-          on-timeout = "/usr/bin/hyprlock";
+          on-timeout = "loginctl lock-session";
         }
         {
+          # Turn off monitors after 5.5 minutes
           timeout = 305;
           on-timeout = "${pkgs.niri}/bin/niri msg action power-off-monitors";
           on-resume = "${pkgs.niri}/bin/niri msg action power-on-monitors";
+        }
+        {
+          # Suspend after 10 minutes
+          timeout = 600;
+          on-timeout = "systemctl suspend";
         }
       ];
     };
