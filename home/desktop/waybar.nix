@@ -16,7 +16,6 @@ let
   workspaceConfig = {
     format = "{icon}";
     format-icons = {
-      "1" = "";
       #"1" = "";
       #"2" = "";
       #"3" = "󰙀";
@@ -49,7 +48,7 @@ in
 {
   programs.waybar = {
     enable = true;
-    systemd.enable = true; # Starts Waybar with the Niri session
+    systemd.enable = false; # Starts Waybar with the Niri session
     settings = {
       mainBar = {
         exclusive = true;

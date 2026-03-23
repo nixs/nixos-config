@@ -34,11 +34,22 @@
   };
 
   home.packages = with pkgs; [
+    brightnessctl
+    grim
     playerctl
     polkit_gnome
+    slurp
+    swappy
     wl-clipboard
     wdisplays
- ];
+  ];
+
+  home.file.".config/swappy/config".text = ''
+    [Default]
+    save_dir=$HOME/Pictures/Screenshots
+    save_filename_format=Screenshot-%Y%m%d-%H%M%S.png
+    early_exit=true
+  '';
 
   home.sessionVariables = {
     _JAVA_AWT_WM_NONREPARENTING = "1";

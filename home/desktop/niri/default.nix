@@ -51,50 +51,111 @@
   
     # Example Keybindings
     binds = with config.lib.niri.actions; {
-      # "Alt+Shift+Return".action = spawn "gnome-terminal" "--app-id" "terminal.niri";
-      # "Alt+Shift+T".action = spawn "gnome-terminal" "--app-id" "terminal.niri";
-      # "Mod+Return".action = spawn "gnome-terminal" "--app-id" "terminal.niri";
-      # Replace with your preferred keys
-      "Mod+Shift+Slash".action = { show-hotkey-overlay = { }; };
-      "Alt+Shift+Slash".action = { show-hotkey-overlay = { }; };
-      "Mod+Shift+E".action = { quit = { }; };
-      "Alt+Shift+E".action = { quit = { }; };
-    
-      "Alt+Shift+Return".action = spawn "kitty";
-      "Alt+Shift+T".action = spawn "kitty";
-      "Mod+Return".action = spawn "kitty";
-      "Mod+D".action = spawn "fuzzel";
-      "Alt+D".action = spawn "fuzzel";
-      "Mod+F".action = spawn "${pkgs.rofi}/bin/rofi -show";
-      "Alt+F".action = spawn "${pkgs.rofi}/bin/rofi -show";
-      "Mod+Q".action = close-window;
-      "Alt+Shift+Q".action = close-window;
-      
+      "Alt+Shift+Slash" = { action = show-hotkey-overlay; };
+      "Alt+Shift+Q" = { action = quit; };
+      "Alt+Q" = { action = close-window; repeat = false; };
+      "Alt+O" = { action = toggle-overview; repeat = false; }; 
+      "Mod+Escape" = {
+        action = toggle-keyboard-shortcuts-inhibit;
+        allow-inhibiting = false;
+      };
+
+      "Alt+T" = {
+        action.spawn = "kitty";
+        hotkey-overlay.title = "Terminal";
+      };
+      "Alt+Return" = {
+        action.spawn = "kitty";
+        hotkey-overlay.title = "Terminal";
+      };
+      "Alt+Space".action.spawn = [ "rofi" "-show" ];
+
       # Scrolling / Navigation
       "Alt+H".action = focus-column-left;
       "Alt+L".action = focus-column-right;
       "Alt+K".action = focus-window-or-workspace-up;
       "Alt+J".action = focus-window-or-workspace-down;
-      "Alt+Shift+Left".action = focus-column-left;
-      "Alt+Shift+Right".action = focus-column-right;
-      "Alt+Shift+Up".action = focus-window-or-workspace-up;
-      "Alt+Shift+Down".action = focus-window-or-workspace-down;
+      "Alt+Shift+H".action = focus-monitor-left;
+      "Alt+Shift+L".action = focus-monitor-right;
 
       # Moving Windows
-      "Alt+Shift+Ctrl+Left".action = move-column-left;
-      "Alt+Shift+Ctrl+Right".action = move-column-right;
+      "Alt+Ctrl+H".action = move-column-left;
+      "Alt+Ctrl+L".action = move-column-right;
+      "Alt+Ctrl+K".action = move-window-up;
+      "Alt+Ctrl+J".action = move-window-down;
+      "Alt+Ctrl+Shift+H".action = move-column-to-monitor-left;
+      "Alt+Ctrl+Shift+L".action = move-column-to-monitor-right;
 
       # Layout Controls
       "Alt+Shift+R".action = switch-preset-column-width;
+      "Alt+Ctrl+R".action = reset-window-height;
       "Alt+Shift+F".action = maximize-column;
-      "Alt+Shift+Space".action = toggle-window-floating;
+      "Alt+Ctrl+F".action = fullscreen-window;
+      "Alt+W".action = toggle-column-tabbed-display;
+      "Alt+V".action = toggle-window-floating;
+      "Alt+Shift+Ctrl+V".action = switch-focus-between-floating-and-tiling;
 
-      "Alt+Comma".action = consume-window-into-column;
-      "Alt+Period".action = expel-window-from-column;
+      "Alt+Minus".action.set-column-width = "-10%";
+      "Alt+Equal".action.set-column-width = "+10%";
+
+      "Alt+BracketLeft".action = consume-window-into-column;
+      "Alt+BracketRight".action = expel-window-from-column;
+      "Alt+Comma".action = consume-or-expel-window-left;
+      "Alt+Period".action = consume-or-expel-window-right;
+
+      "Super+1".action = focus-workspace 1;
+      "Super+2".action = focus-workspace 2;
+      "Super+3".action = focus-workspace 3;
+      "Super+4".action = focus-workspace 4;
+      "Super+5".action = focus-workspace 5;
+      "Super+6".action = focus-workspace 6;
+      "Super+7".action = focus-workspace 7;
+      "Super+8".action = focus-workspace 8;
+      "Super+9".action = focus-workspace 9;
+      "Ctrl+1".action.move-column-to-workspace = 1;
+      "Ctrl+2".action.move-column-to-workspace = 2;
+      "Ctrl+3".action.move-column-to-workspace = 3;
+      "Ctrl+4".action.move-column-to-workspace = 4;
+
+      # Print
+      "Print".action.screenshot-screen = { show-pointer = true; };
+      "Alt+Print".action.screenshot-window = [];
+      "Shift+Print".action.spawn-sh = "grim -g \"$(slurp)\" - | swappy -f -";
+      "XF86SelectiveScreenshot".action.spawn-sh = "grim -g \"$(slurp)\" - | swappy -f -";
+
+      # Example volume keys mappings for PipeWire & WirePlumber.
+      # The allow-when-locked=true property makes them work even when the session is locked.
+      # Using spawn-sh allows to pass multiple arguments together with the command.
+      # "-l 1.0" limits the volume to 100%.
+      "XF86AudioRaiseVolume" = {
+        action = spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0";
+        allow-when-locked = true;
+      };
+      "XF86AudioLowerVolume" = {
+        action = spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+        allow-when-locked = true;
+      };
+      "XF86AudioMute" = {
+        action = spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        allow-when-locked = true;
+      };
+      "XF86AudioMicMute" = {
+        action = spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+        allow-when-locked = true;
+      };
+
+      # Example brightness key mappings for brightnessctl.
+      # You can use regular spawn with multiple arguments too (to avoid going through "sh"),
+      # but you need to manually put each argument in separate "" quotes.
+      "XF86MonBrightnessUp" = {
+        action = spawn-sh "brightnessctl --class=backlight set +10%";
+        allow-when-locked = true;
+      };
+      "XF86MonBrightnessDown" = {
+        action = spawn-sh "brightnessctl --class=backlight set 10%-";
+        allow-when-locked = true;
+      };
      
-      # Screenshot (requires grim/slurp)
-      # "Print".action = screenshot;
-  
       # Open DMS Spotlight/Launcher
       # "Alt+Shift+M".action = spawn "dms" "ipc" "call" "spotlight" "toggle";
       # "Alt+M".action = spawn "dms" "ipc" "call" "spotlight" "toggle";
@@ -111,9 +172,9 @@
   
     # Startup programs
     spawn-at-startup = [
-      { command = [ "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1" ]; }
-      { command = [ "${pkgs.waybar}/bin/waybar" ]; }
       #{ command = [ "${pkgs.dms}/bin/dms" "run" ]; }
+      { command = [ "${pkgs.waybar}/bin/waybar" ]; }
+      { command = [ "${pkgs.kitty}/bin/kitty" ]; }
       { command = [ "google-chrome-stable" ]; }
     ];
   };
@@ -129,6 +190,9 @@
     config = {
       common = {
         default = [ "gnome" "gtk" ];
+        "org.freedesktop.impl.portal.Access" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Notification" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
       };
     };
   };
