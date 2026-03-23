@@ -48,7 +48,7 @@ in
 {
   programs.waybar = {
     enable = true;
-    systemd.enable = false; # Starts Waybar with the Niri session
+    systemd.enable = false;  # Spawned by niri instead.
     settings = {
       mainBar = {
         exclusive = true;
