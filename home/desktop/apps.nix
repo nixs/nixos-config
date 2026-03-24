@@ -84,6 +84,13 @@ in {
         desktopIcon = "office-calendar";
         priority = 20;
       };
+      meet = {
+        name = "Google Meet";
+        icon = " 󰕧 ";
+        url = "https://meet.google.com";
+        desktopIcon = "video-display";
+        priority = 30;
+      };
     };
   };
 }

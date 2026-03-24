@@ -32,6 +32,8 @@
       "DISPLAY" = ":0";
     };
 
+    screenshot-path = "~/Pictures/Screenshots/Screenshot-%Y%m%d-%H%M%S.png";
+
     # Keybindings and behavior
     input = {
       # mod-key = "Alt";
