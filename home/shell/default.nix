@@ -9,6 +9,7 @@ in
     ./bottom.nix
     ./fzf.nix
     ./git.nix
+    ./ssh.nix
     ./starship.nix
     ./tmux.nix
     ./vim.nix
