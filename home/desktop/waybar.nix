@@ -58,7 +58,10 @@ in
         passthrough = false;
         gtk-layer-shell = true;
 
-        modules-left = [ (if desktop == "hyprland" then "hyprland/workspaces" else "niri/workspaces") ];
+        modules-left = [
+          "group/web-apps"
+          (if desktop == "hyprland" then "hyprland/workspaces" else "niri/workspaces")
+        ];
         modules-center = [ "niri/window" ];
         modules-right = modules;
 

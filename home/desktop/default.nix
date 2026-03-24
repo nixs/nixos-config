@@ -6,6 +6,7 @@ in
   imports = [
     (./. + "/${desktop}")
 
+    ./apps.nix
     ./gtk.nix
     ./kitty.nix
     ./mako.nix

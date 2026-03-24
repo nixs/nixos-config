@@ -12,10 +12,10 @@ in
     enable = true;
     package = pkgs.rofi;
     # Terminal override.
-    # terminal = "${pkgs.ghostty}/bin/ghostty";
+    terminal = "${pkgs.kitty}/bin/kitty";
 
     extraConfig = {
-      modi = "combi,window,drun";
+      modi = "drun,window,combi";
       combi-modi = "window,drun";
       show-icons = true;
       drun-display-format = "{icon} {name}";
