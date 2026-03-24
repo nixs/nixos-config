@@ -71,7 +71,7 @@ in
           format-disconnected = "";
           tooltip-format = "{ifname} / {essid} ({signalStrength}%) / {ipaddr}";
           max-length = 15;
-          on-click = "${pkgs.kitty}/bin/kitty -e ${pkgs.networkmanager}/bin/nmtui";
+          on-click = "nm-connection-editor";
         };
 
         "idle_inhibitor" = {
@@ -101,6 +101,12 @@ in
             ""
             ""
           ];
+        };
+
+        "tray" = {
+          icon-size = 16;
+          icon-theme = "Papirus";
+          spacing = 2;
         };
 
         "group/group-power" = {

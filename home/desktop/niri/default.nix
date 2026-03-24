@@ -61,6 +61,51 @@
         variable-refresh-rate = true;   # Enable VRR/FreeSync
       };
     };
+
+    workspaces = {
+      "1:main" = { };
+      "2:code" = { };
+      "3:remote" = { };
+    };
+
+    window-rules = [
+      {
+        matches = [
+          { app-id = "org.gnome.*"; }
+          { app-id = "wdisplays"; }
+          { app-id = "pinentry-qt"; }
+          { app-id = "^code$"; }
+        ];
+        open-floating = true;
+      }
+      {
+        matches = [
+          { app-id = "nm-connection-editor"; }
+          { app-id = "pavucontrol"; }
+          { app-id = "com.saivert.pwvucontrol"; }
+        ];
+        open-floating = true;
+        default-floating-position = {
+          x = 0;
+          y = 0;
+          relative-to = "top-right";
+        };
+      }
+      {
+        matches = [ { title = "Meet - .*"; } ];
+        excludes = [ { title = "Google Chrome"; } ];
+        open-floating = true;
+        default-floating-position = {
+          x = 32; 
+          y = 32;
+          relative-to = "bottom-right";
+        };
+      }
+      {
+        matches = [ { app-id = "chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default"; } ];
+        open-on-workspace = "1:main";
+      }
+    ];
   
     # Example Keybindings
     binds = with config.lib.niri.actions; {
@@ -81,7 +126,9 @@
         action.spawn = [ "kitty" "--title=Terminal" ];
         hotkey-overlay.title = "Terminal";
       };
+      "Alt+R".action.spawn = [ "rofi" "-show" "run" ];
       "Alt+Space".action.spawn = [ "rofi" "-show" ];
+      "Alt+X".action.spawn-sh = "cliphist list | rofi -dmenu | cliphist decode | wl-copy";
       "Alt+C".action.spawn = [ "google-chrome-stable" ];
 
       # Scrolling / Navigation
@@ -189,8 +236,9 @@
     spawn-at-startup = [
       #{ command = [ "${pkgs.dms}/bin/dms" "run" ]; }
       { command = [ "${pkgs.waybar}/bin/waybar" ]; }
-      { command = [ "${pkgs.kitty}/bin/kitty" ]; }
+      { command = [ "${pkgs.kitty}/bin/kitty" "--title=Terminal" ]; }
       { command = [ "${pkgs.hypridle}/bin/hypridle" ]; }
+      { command = [ "wl-paste --watch cliphist store" ]; }
       { command = [ "google-chrome-stable" ]; }
     ];
   };

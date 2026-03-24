@@ -2,7 +2,7 @@
 @import "catppuccin-mocha.rasi"
 
 * {
-    font:   "monospace 16";
+    font:   "monospace 12";
 }
 
 window {
