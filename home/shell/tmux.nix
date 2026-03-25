@@ -26,9 +26,10 @@
 
         # Append terminal override; the value should be on whatever $TERM is outside tmux
         set -ag terminal-overrides ",xterm*:colors=256"
+        set -as terminal-features ",xterm-kitty:RGB"
 
         unbind r
-        bind r source-file ~/.config/tmux/tmux.conf
+        bind r source-file ~/.config/tmux/tmux.conf \; display-message "Config Reloaded!"
 
         set -g @resurrect-capture-pane-contents 'on'
         set -g @continuum-restore 'on'
@@ -38,20 +39,6 @@
         set-window-option -g mode-keys vi
         bind-key -T copy-mode-vi 'v' send -X begin-selection # start selecting text with "v"
         bind-key -T copy-mode-vi 'y' send -X copy-selection # copy text with "y"
-
-        # Catppuccin options
-        set -g @catppuccin_host 'on'
-        set -g @catppuccin_window_tabs_enabled 'on'
-
-        set -g @catppuccin_window_default_fill "all"
-        set -g @catppuccin_window_current_fill "all"
-        set -g @catppuccin_window_left_separator "█"
-        set -g @catppuccin_window_right_separator "█ "
-        set -g @catppuccin_window_middle_separator " "
-
-        set -g @catppuccin_status_fill "all"
-        set -g @catppuccin_status_left_separator  "█"
-        set -g @catppuccin_status_connect_separator "yes"
 
         # Smart pane switching with awareness of Vim splits.
         # See: https://github.com/alexghergh/nvim-tmux-navigation
@@ -101,5 +88,17 @@
       '';
     };
   };
-  catppuccin.tmux.enable = true;
+  catppuccin.tmux = {
+    enable = true;
+    extraConfig = ''
+      # Catppuccin options
+      set -g @catppuccin_window_status_style "slanted"
+      set -g @catppuccin_status_module_bg_color "#{catppuccin_status_host_color}"
+      set -g @catppuccin_status_left_separator "█"
+
+      # set -g status-left ""
+      set -g  status-right "#{E:@catppuccin_status_application}"
+      set -ag status-right "#{E:@catppuccin_status_session}"
+    '';
+  };
 }
