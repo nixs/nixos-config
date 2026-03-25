@@ -32,6 +32,7 @@
       "DISPLAY" = ":0";
     };
 
+    prefer-no-csd = false;
     screenshot-path = "~/Pictures/Screenshots/Screenshot-%Y%m%d-%H%M%S.png";
 
     # Keybindings and behavior
@@ -65,7 +66,7 @@
     };
 
     workspaces = {
-      "1:main" = { };
+      "1:main" = { open-on-output = "eDP-1"; };
       "2:code" = { };
       "3:remote" = { };
     };
@@ -104,8 +105,24 @@
         };
       }
       {
-        matches = [ { app-id = "chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default"; } ];
+        matches = [
+          { app-id = "chrome-calendar.google.com.*"; }
+          { app-id = "chrome-mail.google.com.*"; }
+          { app-id = "chrome-meet.google.com.*"; }
+        ];
         open-on-workspace = "1:main";
+      }
+      {
+        matches = [ { app-id = "chrome-calendar.*"; } ];
+        default-column-width = { proportion = 0.33; };
+      }
+      {
+        matches = [ { app-id = "chrome-cider-v.*"; } ];
+        open-on-workspace = "2:code";
+      }
+      {
+        matches = [ { app-id = "chrome-remotedesktop.corp.*"; } ];
+        open-on-workspace = "3:remote";
       }
     ];
   
@@ -144,8 +161,8 @@
       # Moving Windows
       "Alt+Ctrl+H".action = move-column-left;
       "Alt+Ctrl+L".action = move-column-right;
-      "Alt+Ctrl+K".action = move-window-up;
-      "Alt+Ctrl+J".action = move-window-down;
+      "Alt+Ctrl+K".action = move-window-up-or-to-workspace-up;
+      "Alt+Ctrl+J".action = move-window-down-or-to-workspace-down;
       "Alt+Ctrl+Shift+H".action = move-column-to-monitor-left;
       "Alt+Ctrl+Shift+L".action = move-column-to-monitor-right;
 
