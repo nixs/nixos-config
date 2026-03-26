@@ -10,6 +10,7 @@ let
       "network"
       "bluetooth"
       "custom/separator"
+      "tray"
       "idle_inhibitor"
       "group/group-power"
     ];
@@ -121,9 +122,9 @@ in
         };
 
         "tray" = {
-          icon-size = 16;
+          icon-size = 14;
           icon-theme = "Papirus";
-          spacing = 2;
+          spacing = 8;
         };
 
         "group/group-power" = {

@@ -103,6 +103,7 @@
           { app-id = "nm-connection-editor"; }
           { app-id = "pavucontrol"; }
           { app-id = "com.saivert.pwvucontrol"; }
+          { app-id = ".*blueman.*"; }
         ];
         open-floating = true;
         default-floating-position = {
