@@ -115,9 +115,10 @@ tooltip {
 
 #custom-separator {
     font-weight: normal;
-    color: @mantle;
+    color: @surface0;
 }
 
+#tray { padding-left: 8px; }
 #idle_inhibitor { font-size: 10px; padding-right: 12px; }
 #custom-quit { padding-right: 6px; }
 #custom-lock { padding-right: 12px; padding-top: 0px; }
