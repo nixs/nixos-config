@@ -29,8 +29,9 @@ in
           size = "250, 60";
           outer_color = "rgb(24, 25, 38)";
           inner_color = "rgb(30, 32, 48)";
-          font_color = "rgb(198, 160, 246)";
+          font_color = "rgb(138, 173, 244)";
           placeholder_text = "";
+          position = "0, -100";
         }
       ];
 
@@ -46,7 +47,7 @@ in
           position = "0, 160";
         }
         {
-          text = ''cmd[update:60000] echo "$(date +"%A, %d %B")"'';
+          text = ''cmd[update:60000] echo "$(date +"%a, %b %d")"'';
           color = "rgba(184, 192, 224, 1.0)";
           font_family = theme.fonts.default.name;
           font_size = 24;

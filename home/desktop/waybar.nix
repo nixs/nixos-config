@@ -2,20 +2,25 @@
 let
   modules =
     [
-      "network"
       "battery"
+      "custom/separator"
       "wireplumber"
       "pulseaudio#source"
+      "custom/separator"
+      "network"
       "bluetooth"
-      "clock"
+      "custom/separator"
       "idle_inhibitor"
-      "tray"
       "group/group-power"
     ];
 
   workspaceConfig = {
     format = "{icon}";
     format-icons = {
+      "1:main" = "󰋜";
+      "2:code" = "";
+      "3:remote" = "󰢹";
+      "default" = " ";
       #"1" = "";
       #"2" = "";
       #"3" = "󰙀";
@@ -46,6 +51,10 @@ let
   theme = import "${self}/lib/theme" { inherit pkgs; };
 in
 {
+  home.packages = with pkgs; [
+    blueman
+  ];
+
   programs.waybar = {
     enable = true;
     systemd.enable = false;  # Spawned by niri instead.
@@ -62,16 +71,21 @@ in
           "group/web-apps"
           (if desktop == "hyprland" then "hyprland/workspaces" else "niri/workspaces")
         ];
-        modules-center = [ "niri/window" ];
-        modules-right = modules;
+        modules-center = [ "clock" ];
+        modules-right = [ "group/group-right" ];
 
         "hyprland/workspaces" = workspaceConfig;
         "niri/workspaces" = workspaceConfig;
 
+        "group/group-right" = {
+          orientation = "inherit";
+          modules = modules;
+        };
+
         "network" = {
-          format-wifi = "{essid} ";
-          format-ethernet = "{ifname} ";
-          format-disconnected = "";
+          format-wifi = "󰖩 <span font='9' weight='bold' rise='500'>{essid}</span>";
+          format-ethernet = "󰌗";
+          format-disconnected = "󰌙";
           tooltip-format = "{ifname} / {essid} ({signalStrength}%) / {ipaddr}";
           max-length = 15;
           on-click = "nm-connection-editor";
@@ -91,12 +105,12 @@ in
             warning = 20;
             critical = 10;
           };
-          format = "{capacity}% {icon}";
-          format-charging = "{capacity}% ";
-          format-plugged = "";
+          format = "{icon}  <span font='9' weight='bold' rise='500'>{capacity}%</span>";
+          format-alt = "{icon}  <span font='9' weight='bold' rise='500'>{time}</span>";
+          format-charging = "󱐋 <span font='9' weight='bold' rise='500'>{capacity}%</span>";
+          format-plugged = "󱐋 <span font='9' weight='bold' rise='500'>{capacity}%</span>";
+          format-full = "󱐋";
           tooltip-format = "{time} ({capacity}%)";
-          format-alt = "{time} {icon}";
-          format-full = "";
           format-icons = [
             ""
             ""
@@ -138,11 +152,7 @@ in
 
         "custom/lock" = {
           format = "󰍁";
-          on-click =
-            if desktop == "hyprland" then
-              "${pkgs.hyprlock}/bin/hyprlock"
-            else
-              "${pkgs.swaylock-effects}/bin/swaylock -f";
+          on-click = "${pkgs.hyprlock}/bin/hyprlock";
           tooltip = false;
         };
 
@@ -153,54 +163,65 @@ in
         };
 
         "custom/power" = {
-          format = "";
+          format = "󰐥";
           on-click = "${pkgs.systemd}/bin/systemctl poweroff";
           tooltip = false;
         };
 
+        "custom/separator" = {
+          format = "|";
+          interval = "once";
+          tooltip = false;
+        };
+
         "clock" = {
-          format = "{:%d %b %H:%M}";
+          format = "{:%a, %b %d   %I:%M%p}";
         };
 
         "wireplumber" = {
-          format = "{volume}% {icon}";
-          format-muted = "";
-          on-click = "${lib.getExe pkgs.pwvucontrol}";
-          format-icons = [
-            ""
-            ""
-            ""
-          ];
+          format = "{icon} <span font='9' weight='bold' rise='500'>{volume}%</span>";
+          format-muted = "<span color='#f38ba8'>󰝟</span>";
+          on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          on-click-right = "${lib.getExe pkgs.pwvucontrol}";
+          format-icons = {
+            headphone = "";
+            hands-free = "";
+            headset = "";
+            phone = "";
+            portable = "";
+            car = "";
+            default = [ "󰕿" "󰖀" "󰕾" ];
+          };
           tooltip-format = "{volume}% / {node_name}";
         };
 
         "pulseaudio#source" = {
           format = "{format_source}";
-          format-source = "";
-          format-source-muted = "";
-          on-click = "${lib.getExe pkgs.pwvucontrol}";
+          format-source = "󰍬";
+          format-source-muted = "󰍭";
+          on-click = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+          on-click-right = "${lib.getExe pkgs.pwvucontrol}";
           tooltip-format = "{source_volume}% / {desc}";
         };
 
         "bluetooth" = {
           format-on = "";
-          format-connected = "{device_alias} ";
+          format-connected = " {device_alias}";
           format-off = "";
           format-disabled = "";
-          on-click-right = "${lib.getExe' pkgs.blueberry "blueberry"}";
+          on-click-right = "${lib.getExe' pkgs.blueman "blueman-manager"}";
           on-click = "${lib.getExe bluetoothToggle}";
         };
       };
     };
     style = ''
-      @import "waybar.rasi";
+      @import "waybar2.rasi";
 
     '';
   };
 
   xdg.configFile = {
-    "waybar/waybar.rasi" = {
-      source = ./waybar.rasi;
-    };
+    "waybar/waybar.rasi".source = ./waybar.rasi;
+    "waybar/waybar2.rasi".source = ./waybar2.rasi;
   };
 }

@@ -32,7 +32,7 @@
       "DISPLAY" = ":0";
     };
 
-    prefer-no-csd = false;
+    prefer-no-csd = true;
     screenshot-path = "~/Pictures/Screenshots/Screenshot-%Y%m%d-%H%M%S.png";
 
     # Keybindings and behavior
@@ -72,6 +72,23 @@
     };
 
     window-rules = [
+      {
+        clip-to-geometry = true;
+        geometry-corner-radius = {
+          bottom-left = 8.;
+          bottom-right = 8.;
+          top-left = 8.;
+          top-right = 8.;
+        };
+        shadow = {
+          enable = true;
+          softness = 4;
+          spread = 0;
+          offset = { x = 2; y = 2; };
+          color = "#00000080";
+          draw-behind-window = true;
+        };
+      }
       {
         matches = [
           { app-id = "org.gnome.*"; }
@@ -131,11 +148,14 @@
       "Alt+Shift+Slash" = { action = show-hotkey-overlay; };
       "Alt+Shift+Q" = { action = quit; };
       "Alt+Q" = { action = close-window; repeat = false; };
+      "Alt+F4" = { action = close-window; repeat = false; };
+      "Alt+XF86AudioMicMute" = { action = close-window; repeat = false; };
       "Alt+O" = { action = toggle-overview; repeat = false; }; 
       "Mod+Escape" = {
         action = toggle-keyboard-shortcuts-inhibit;
         allow-inhibiting = false;
       };
+      "Super+L".action.spawn = [ "hyprlock" ];
 
       "Alt+T" = {
         action.spawn = [ "kitty" "--title=Terminal" ];
@@ -148,7 +168,8 @@
       "Alt+R".action.spawn = [ "rofi" "-show" "run" ];
       "Alt+Space".action.spawn = [ "rofi" "-show" ];
       "Alt+X".action.spawn-sh = "cliphist list | rofi -dmenu | cliphist decode | wl-copy";
-      "Alt+C".action.spawn = [ "google-chrome-stable" ];
+      "Alt+B".action.spawn = [ "google-chrome-stable" ];
+      "Alt+C".action.spawn = [ "gtk-launch cider" ];
 
       # Scrolling / Navigation
       "Alt+H".action = focus-column-left;
@@ -253,6 +274,8 @@
   
     # Startup programs
     spawn-at-startup = [
+      { command = [ "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" ]; }
+      { command = [ "systemctl" "--user" "start" "niri.service" ]; }
       #{ command = [ "${pkgs.dms}/bin/dms" "run" ]; }
       { command = [ "${pkgs.waybar}/bin/waybar" ]; }
       { command = [ "${pkgs.kitty}/bin/kitty" "--title=Terminal" ]; }
