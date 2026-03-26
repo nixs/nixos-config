@@ -275,14 +275,12 @@
   
     # Startup programs
     spawn-at-startup = [
-      { command = [ "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" ]; }
-      { command = [ "systemctl" "--user" "start" "niri.service" ]; }
-      #{ command = [ "${pkgs.dms}/bin/dms" "run" ]; }
-      { command = [ "${pkgs.waybar}/bin/waybar" ]; }
-      { command = [ "${pkgs.kitty}/bin/kitty" "--title=Terminal" ]; }
-      { command = [ "${pkgs.hypridle}/bin/hypridle" ]; }
+      # { command = [ "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" ]; }
+      # { command = [ "systemctl" "--user" "start" "niri.service" ]; }
+      # { command = [ "${pkgs.dms}/bin/dms" "run" ]; }
+      # { command = [ "${pkgs.waybar}/bin/waybar" ]; }
+      # { command = [ "${pkgs.hypridle}/bin/hypridle" ]; }
       { command = [ "wl-paste --watch cliphist store" ]; }
-      { command = [ "google-chrome-stable" ]; }
     ];
   };
 
