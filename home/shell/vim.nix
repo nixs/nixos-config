@@ -34,8 +34,16 @@
       vim.opt.background = dark
       vim.opt.termguicolors = true
 
-      -- Use system clipboard by default.
-      vim.opt.clipboard:append("unnamedplus")
+      -- y and p uses the internal clipboard instead of unnamedplus.
+      -- vim.opt.clipboard:append("unnamedplus")
+      -- Terminal Ctrl+Shift+C is not aware of vim selection and copies
+      -- the line numbers. Hence, we bind Ctrl+C and mouse selection to write
+      -- to properly copy to system clipboard.
+      vim.keymap.set('v', '<C-c>', '"+y', { noremap = true })
+      vim.keymap.set('v', '<LeftRelease>', '"+y<Esc>', { noremap = true })
+      -- Double-click word and line copy.
+      vim.keymap.set('v', '<2-LeftRelease>', '"+y<Esc>', { noremap = true })
+      vim.keymap.set('v', '<3-LeftRelease>', '"+y<Esc>', { noremap = true })
 
       function map(mode, lhs, rhs, opts)
         local options = {noremap = true, silent = false}

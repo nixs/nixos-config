@@ -17,6 +17,7 @@ in
       background_opacity = "1.0";
       window_padding_width = 4;
       enable_audio_bell = false;
+      clipboard_control = "write-clipboard write-primary";
     };
     shellIntegration.mode = "enabled no-sudo";
     shellIntegration.enableBashIntegration = true;

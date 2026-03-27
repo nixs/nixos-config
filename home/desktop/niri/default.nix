@@ -280,7 +280,7 @@
       # { command = [ "${pkgs.dms}/bin/dms" "run" ]; }
       # { command = [ "${pkgs.waybar}/bin/waybar" ]; }
       # { command = [ "${pkgs.hypridle}/bin/hypridle" ]; }
-      { command = [ "wl-paste --watch cliphist store" ]; }
+      { command = [ (lib.getExe' pkgs.wl-clipboard "wl-paste") "--watch" "cliphist" "store" ]; }
     ];
   };
 

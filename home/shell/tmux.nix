@@ -21,12 +21,12 @@
       ];
 
       extraConfig = ''
+        # Append terminal override; the value should be on whatever $TERM is outside tmux
+        set -as terminal-features ",xterm-kitty:clipboard:256:RGB:focus:hyperlinks"
         set -g status on
         set -g mouse on
-
-        # Append terminal override; the value should be on whatever $TERM is outside tmux
-        set -ag terminal-overrides ",xterm*:colors=256"
-        set -as terminal-features ",xterm-kitty:RGB"
+        set -g set-clipboard on
+        set -g allow-passthrough on
 
         unbind r
         bind r source-file ~/.config/tmux/tmux.conf \; display-message "Config Reloaded!"
@@ -39,6 +39,7 @@
         set-window-option -g mode-keys vi
         bind-key -T copy-mode-vi 'v' send -X begin-selection # start selecting text with "v"
         bind-key -T copy-mode-vi 'y' send -X copy-selection # copy text with "y"
+        bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe # auto-copy on select
 
         # Smart pane switching with awareness of Vim splits.
         # See: https://github.com/alexghergh/nvim-tmux-navigation
@@ -96,7 +97,7 @@
       set -g @catppuccin_status_module_bg_color "#{catppuccin_status_host_color}"
       set -g @catppuccin_status_left_separator "█"
 
-      # set -g status-left ""
+      set -g status-left ""
       set -g  status-right "#{E:@catppuccin_status_application}"
       set -ag status-right "#{E:@catppuccin_status_session}"
     '';
