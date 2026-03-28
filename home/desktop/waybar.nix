@@ -214,6 +214,21 @@ in
           on-click = "${lib.getExe bluetoothToggle}";
         };
       };
+      titleBar = {
+        exclusive = true;
+        position = "top";
+        layer = "top";
+        height = 18;
+        passthrough = false;
+        gtk-layer-shell = true;
+
+        modules-center = [ "niri/window" ];
+        "niri/window" = {
+          format = "{title}";
+          separate-outputs = true;
+          icon = false;
+        };
+      };
     };
     style = ''
       @import "waybar2.rasi";

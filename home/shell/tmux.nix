@@ -27,6 +27,7 @@
         set -g mouse on
         set -g set-clipboard on
         set -g allow-passthrough on
+        set -g set-titles on
 
         unbind r
         bind r source-file ~/.config/tmux/tmux.conf \; display-message "Config Reloaded!"
@@ -92,6 +93,10 @@
   catppuccin.tmux = {
     enable = true;
     extraConfig = ''
+      set -g set-titles-string "#(whoami)@#h:#S: #T"
+      set -g @catppuccin_window_current_text "#{=15:pane_title}"
+      set -g @catppuccin_window_text "#{=15:pane_title}"
+
       # Catppuccin options
       set -g @catppuccin_window_status_style "slanted"
       set -g @catppuccin_status_module_bg_color "#{catppuccin_status_host_color}"

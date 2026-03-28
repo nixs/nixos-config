@@ -159,11 +159,11 @@
       "Super+L".action.spawn = [ "hyprlock" ];
 
       "Alt+T" = {
-        action.spawn = [ "kitty" "--title=Terminal" ];
+        action.spawn = [ "kitty" ];
         hotkey-overlay.title = "Terminal";
       };
       "Alt+Return" = {
-        action.spawn = [ "kitty" "--title=Terminal" ];
+        action.spawn = [ "kitty" ];
         hotkey-overlay.title = "Terminal";
       };
       "Alt+R".action.spawn = [ "rofi" "-show" "run" ];

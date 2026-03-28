@@ -19,7 +19,7 @@ in
       enable_audio_bell = false;
       clipboard_control = "write-clipboard write-primary";
     };
-    shellIntegration.mode = "enabled no-sudo";
+    shellIntegration.mode = "enabled no-sudo no-title";
     shellIntegration.enableBashIntegration = true;
     shellIntegration.enableZshIntegration = true;
   };
