@@ -1,4 +1,8 @@
-_: {
+{ lib, ... }:
+let
+  ripgrepCommand = "rg --files --hidden --follow --glob \"!.git/*\"";
+in
+{
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
@@ -6,15 +10,15 @@ _: {
 
     changeDirWidgetOptions = [ "--preview 'tree -C {} | head -200'" ];
 
-    defaultCommand = "rg --files";
+    defaultCommand = ripgrepCommand;
     defaultOptions = [
       "--height 90%"
       "--border"
     ];
 
-    fileWidgetCommand = "rg --files";
+    fileWidgetCommand = ripgrepCommand;
     fileWidgetOptions = [
-      "--preview 'bat -n --color=always {}'"
+      "--preview 'bat -n --style=numbers --color=always --line-range :500 {}'"
       "--bind 'ctrl-/:change-preview-window(down|hidden|)'"
     ];
 

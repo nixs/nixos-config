@@ -170,7 +170,6 @@
       "Alt+Space".action.spawn = [ "rofi" "-show" ];
       "Alt+X".action.spawn-sh = "cliphist list | rofi -dmenu | cliphist decode | wl-copy";
       "Alt+B".action.spawn = [ "google-chrome-stable" ];
-      "Alt+C".action.spawn = [ "gtk-launch cider" ];
 
       # Scrolling / Navigation
       "Alt+H".action = focus-column-left;
