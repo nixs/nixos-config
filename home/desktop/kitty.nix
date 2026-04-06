@@ -19,6 +19,9 @@ in
       enable_audio_bell = false;
       clipboard_control = "write-clipboard write-primary";
     };
+    keybindings = {
+      "f5" = "send_text all \\r~.";
+    };
     shellIntegration.mode = "enabled no-sudo no-title";
     shellIntegration.enableBashIntegration = true;
     shellIntegration.enableZshIntegration = true;
