@@ -148,25 +148,29 @@ in
               "${pkgs.hyprland}/bin/hyprctl dispatch exit"
             else
               "${pkgs.niri}/bin/niri msg action quit";
-          tooltip = false;
+          tooltip = true;
+          tooltip-format = "Log out";
         };
 
         "custom/lock" = {
           format = "󰍁";
-          on-click = "${pkgs.hyprlock}/bin/hyprlock";
-          tooltip = false;
+          on-click = "hyprlock";
+          tooltip = true;
+          tooltip-format = "Lock";
         };
 
         "custom/reboot" = {
           format = "󰜉";
           on-click = "${pkgs.systemd}/bin/systemctl reboot";
-          tooltip = false;
+          tooltip = true;
+          tooltip-format = "Restart";
         };
 
         "custom/power" = {
           format = "󰐥";
           on-click = "${pkgs.systemd}/bin/systemctl poweroff";
-          tooltip = false;
+          tooltip = true;
+          tooltip-format = "Shut down";
         };
 
         "custom/separator" = {
