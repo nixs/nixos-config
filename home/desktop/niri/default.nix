@@ -44,25 +44,14 @@
         tap = true;
         dwt = true;
       };
+      workspace-auto-back-and-forth = true;
+      power-key-handling.enable = false;
     };
   
     # Layout settings
     layout = {
       gaps = 10;
       center-focused-column = "never";
-    };
-
-    outputs = {
-      "eDP-1" = {
-        mode = { width = 1920; height = 1200; refresh = 60.0; };
-        scale = 1.25;
-        position = { x = 0; y = 146; };
-      };
-      "DP-5" = {
-        mode = { width = 1920; height = 1200; refresh = 60.0; };
-        position = { x = 1536; y = 0; }; # Place next to internal display
-        variable-refresh-rate = true;   # Enable VRR/FreeSync
-      };
     };
 
     workspaces = {
@@ -169,26 +158,38 @@
       "Alt+R".action.spawn = [ "rofi" "-show" "run" ];
       "Alt+Space".action.spawn = [ "rofi" "-show" ];
       "Alt+X".action.spawn-sh = "cliphist list | rofi -dmenu | cliphist decode | wl-copy";
-      "Alt+B".action.spawn = [ "google-chrome-stable" ];
+      "Alt+B".action.spawn = [ "google-chrome-stable" "--remote-debugging-port=9222" ];
 
       # Scrolling / Navigation
       "Alt+H".action = focus-column-left;
       "Alt+L".action = focus-column-right;
       "Alt+K".action = focus-window-or-workspace-up;
       "Alt+J".action = focus-window-or-workspace-down;
+      "Alt+Tab".action = focus-window-down-or-top;
+      "Alt+Left".action = focus-column-left;
+      "Alt+Right".action = focus-column-right;
+      "Alt+Up".action = focus-window-or-workspace-up;
+      "Alt+Down".action = focus-window-or-workspace-down;
       "Alt+Shift+H".action = focus-monitor-left;
       "Alt+Shift+L".action = focus-monitor-right;
+      # PgUp / PgDn
+      "Alt+Next".action = focus-monitor-next;
+      "Alt+Prior".action = focus-monitor-previous;
 
       # Moving Windows
       "Alt+Ctrl+H".action = move-column-left;
       "Alt+Ctrl+L".action = move-column-right;
       "Alt+Ctrl+K".action = move-window-up-or-to-workspace-up;
       "Alt+Ctrl+J".action = move-window-down-or-to-workspace-down;
+      "Alt+Ctrl+Left".action = move-column-left;
+      "Alt+Ctrl+Right".action = move-column-right;
+      "Alt+Ctrl+Up".action = move-window-up-or-to-workspace-up;
+      "Alt+Ctrl+Down".action = move-window-down-or-to-workspace-down;
       "Alt+Ctrl+Shift+H".action = move-column-to-monitor-left;
       "Alt+Ctrl+Shift+L".action = move-column-to-monitor-right;
 
-      "Alt+BracketLeft".action = consume-window-into-column;
-      "Alt+BracketRight".action = expel-window-from-column;
+      "Alt+Shift+Comma".action = consume-window-into-column;
+      "Alt+Shift+Period".action = expel-window-from-column;
       "Alt+Comma".action = consume-or-expel-window-left;
       "Alt+Period".action = consume-or-expel-window-right;
 
@@ -206,6 +207,12 @@
       "Alt+Ctrl+2".action.move-column-to-workspace = 2;
       "Alt+Ctrl+3".action.move-column-to-workspace = 3;
       "Alt+Ctrl+4".action.move-column-to-workspace = 4;
+
+      "Alt+BracketLeft".action = move-workspace-to-monitor-next;
+      "Alt+BracketRight".action = move-workspace-to-monitor-previous;
+      # PgUp / PgDn
+      "Alt+Ctrl+Next".action = move-workspace-to-monitor-next;
+      "Alt+Ctrl+Prior".action = move-workspace-to-monitor-previous;
 
       # Layout Controls
       "Alt+Shift+R".action = switch-preset-column-width;
@@ -274,11 +281,9 @@
   
     # Startup programs
     spawn-at-startup = [
-      # { command = [ "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" ]; }
-      # { command = [ "systemctl" "--user" "start" "niri.service" ]; }
-      # { command = [ "${pkgs.dms}/bin/dms" "run" ]; }
-      # { command = [ "${pkgs.waybar}/bin/waybar" ]; }
-      # { command = [ "${pkgs.hypridle}/bin/hypridle" ]; }
+      { command = [ (lib.getExe pkgs.hypridle) ]; }
+      { command = [ (lib.getExe pkgs.waybar) ]; }
+      { command = [ (lib.getExe pkgs.wlsunset) "-l37.7" "-L-122.4" "-t4000" "-T6500" ]; }
       { command = [ (lib.getExe' pkgs.wl-clipboard "wl-paste") "--watch" "cliphist" "store" ]; }
     ];
   };
