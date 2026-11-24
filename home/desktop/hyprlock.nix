@@ -8,6 +8,7 @@ let
   theme = import "${self}/lib/theme" { inherit pkgs; };
 in
 {
+  catppuccin.hyprlock.enable = false;
   programs.hyprlock = {
     enable = true;
     settings = {

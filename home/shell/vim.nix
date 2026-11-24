@@ -105,7 +105,7 @@
         plugin = lightline-vim;
         type = "viml";
         config = ''
-          let g:lightline = {'colorscheme': 'catppuccin'}
+          let g:lightline = {'colorscheme': 'catppuccin_mocha'}
         '';
       }
       {
@@ -143,5 +143,10 @@
       }
     ];
   };
-  catppuccin.nvim.enable = true;
+  catppuccin.nvim = {
+    enable = true;
+    settings = {
+      accent = "blue";
+    };
+  };
 }

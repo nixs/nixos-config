@@ -18,8 +18,10 @@ in
   ];
 
   catppuccin = {
+    autoEnable = true;
+    enable = true;
     inherit (theme.catppuccin) flavor;
-    inherit (theme.catppuccin) accent;
+    accent = "blue";
   };
 
   programs = {

@@ -29,8 +29,7 @@ rec {
 
   iconTheme = rec {
     name = "Papirus-Dark";
-    package = pkgs.papirus-icon-theme;
-    iconPath = "${package}/share/icons/${name}";
+    iconPath = "${pkgs.catppuccin-papirus-folders}/share/icons/${name}";
   };
 
   cursorTheme = {

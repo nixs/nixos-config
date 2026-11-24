@@ -41,7 +41,7 @@ in
     };
 
     iconTheme = {
-      inherit (theme.iconTheme) name package;
+      inherit (theme.iconTheme) name;
     };
   };
 }

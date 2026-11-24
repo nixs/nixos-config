@@ -8,6 +8,8 @@ in
     platformTheme.name = "gtk";
   };
 
+  catppuccin.kvantum.enable = false;
+
   home = {
     packages = with pkgs; [
       qt6.qtwayland
